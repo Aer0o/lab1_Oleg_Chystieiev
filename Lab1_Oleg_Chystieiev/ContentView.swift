@@ -9,7 +9,9 @@ import SwiftUI
 
 // ViewModel to handle logic and state
 class PrimeGameViewModel: ObservableObject {
-    
+    @Published var currentNumber = Int.random(in: 1...100)
+    @Published var correctAnswers = 0
+    @Published var wrongAnswers = 0
 }
 
 struct ContentView: View {
