@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+// ViewModel to handle logic and state
+class PrimeGameViewModel: ObservableObject {
+    
+}
+
 struct ContentView: View {
     var body: some View {
         VStack {
