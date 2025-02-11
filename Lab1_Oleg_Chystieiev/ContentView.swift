@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  Lab1_Oleg_Chystieiev
 //
-//  Created by Nadia Rukhlia on 2025-02-11.
+//  Created by Oleg Chystieiev on 2025-02-11.
 //
 
 import SwiftUI
