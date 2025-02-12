@@ -65,6 +65,13 @@ class PrimeGameViewModel: ObservableObject {
                 showDialog = true
             }
         }
+    
+        // Reset the game statistics
+        func resetGame() {
+            correctAnswers = 0
+            wrongAnswers = 0
+            currentAttempt = 0
+        }
 }
 
 struct ContentView: View {
