@@ -87,6 +87,21 @@ struct ContentView: View {
                     .foregroundColor(.blue)
                 }
             }
+            
+            Spacer()
+            
+            // Show the tick/cross icons after selection
+            if viewModel.correctAnswers > 0 {
+                Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(.green)
+                        .font(.system(size: 30))
+            } else if viewModel.wrongAnswers > 0 {
+                Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.red)
+                        .font(.system(size: 30))
+            }
+                        
+            Spacer()
         }
     }
 }
