@@ -34,6 +34,7 @@ class PrimeGameViewModel: ObservableObject {
         func updateNumber() {
             currentNumber = Int.random(in: 1...100)
             currentAttempt += 1
+            lastSelection = nil
             
             // If the user hasn't selected, mark it as wrong
             if currentAttempt % 10 == 0 {
@@ -60,6 +61,8 @@ class PrimeGameViewModel: ObservableObject {
             } else {
                 wrongAnswers += 1
             }
+            
+            lastSelection = isPrimeSelection
             
             // After 10 attempts, show the dialog
             if currentAttempt % 10 == 0 {
