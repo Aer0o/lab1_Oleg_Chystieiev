@@ -66,7 +66,6 @@ class PrimeGameViewModel: ObservableObject {
         // Determine if the current number is prime
         let correctAnswer = isPrime(currentNumber)
         
-        // If the user's selection matches the correct answer, increase the correct count, otherwise increase the wrong count
         if correctAnswer == isPrimeSelection {
             correctAnswers += 1
             lastSelection = true
@@ -167,6 +166,7 @@ struct ContentView: View {
                     Text("You got \(viewModel.correctAnswers) correct and \(viewModel.wrongAnswers) wrong answers")
                         .font(.title2)
                         .padding(.bottom, 20)
+                        .foregroundColor(.black)
                     HStack {
                         Button("Close") {
                             viewModel.showDialog = false
