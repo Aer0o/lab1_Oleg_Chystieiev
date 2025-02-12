@@ -14,7 +14,8 @@ class PrimeGameViewModel: ObservableObject {
     @Published var wrongAnswers = 0
     @Published var showDialog = false
     @Published var currentAttempt = 0
-    @Published var lastSelection: Bool? = nil // Keeps track of the last selection (Prime/Not Prime)
+    @Published var lastSelection: Bool? = nil
+    @Published var isButtonDisabled: Bool = false
     
     private var timer: Timer?
     
@@ -33,7 +34,8 @@ class PrimeGameViewModel: ObservableObject {
     func updateNumber() {
         currentNumber = Int.random(in: 1...100)
         currentAttempt += 1
-        lastSelection = nil // Reset the selection state to hide the tick/cross icons
+        lastSelection = nil
+        isButtonDisabled = false
         
         // Show the dialog after every 10 attempts
         if currentAttempt % 10 == 0 {
@@ -65,6 +67,8 @@ class PrimeGameViewModel: ObservableObject {
             wrongAnswers += 1
             lastSelection = false
         }
+        
+        isButtonDisabled = true
     
     }
     
@@ -105,6 +109,7 @@ struct ContentView: View {
                         .cornerRadius(10)
                         .frame(minWidth: 100, minHeight: 50)
                 }
+                .disabled(viewModel.isButtonDisabled)
                 
                 Button(action: {
                     viewModel.userSelectedPrime(isPrimeSelection: false)
@@ -117,6 +122,7 @@ struct ContentView: View {
                         .cornerRadius(10)
                         .frame(minWidth: 100, minHeight: 50)
                 }
+                .disabled(viewModel.isButtonDisabled)
             }
             .padding()
 
