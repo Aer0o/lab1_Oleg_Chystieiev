@@ -15,6 +15,7 @@ class PrimeGameViewModel: ObservableObject {
     @Published var showDialog = false
     @Published var timerIsRunning = true
     @Published var currentAttempt = 0
+    @Published var lastSelection: Bool? = nil
     
     private var timer: Timer?
         
@@ -139,7 +140,7 @@ struct ContentView: View {
             // Dialog after every 10 attempts
             if viewModel.showDialog {
                     VStack {
-                        Text("You got \(viewModel.correctAnswers) correct and \(viewModel.wrongAnswers) wrong")
+                        Text("You got\(viewModel.correctAnswers) correct and \(viewModel.wrongAnswers) wrong")
                     Button("Close") {
                             viewModel.showDialog = false
                             }
