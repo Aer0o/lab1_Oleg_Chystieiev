@@ -29,7 +29,7 @@ class PrimeGameViewModel: ObservableObject {
             }
         }
     
-    // Update number every 5 seconds
+        // Update number every 5 seconds
         func updateNumber() {
             currentNumber = Int.random(in: 1...100)
             currentAttempt += 1
@@ -38,6 +38,17 @@ class PrimeGameViewModel: ObservableObject {
             if currentAttempt % 10 == 0 {
                 showDialog = true
             }
+        }
+    
+        // Check if the number is prime
+        func isPrime(_ number: Int) -> Bool {
+            guard number > 1 else { return false }
+            for i in 2..<number {
+                if number % i == 0 {
+                    return false
+                }
+            }
+            return true
         }
 }
 
