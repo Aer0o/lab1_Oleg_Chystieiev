@@ -50,6 +50,21 @@ class PrimeGameViewModel: ObservableObject {
             }
             return true
         }
+    
+        // Handle the user's choice of Prime or Not Prime
+        func userSelectedPrime(isPrimeSelection: Bool) {
+            let correctAnswer = isPrime(currentNumber)
+            if correctAnswer == isPrimeSelection {
+                correctAnswers += 1
+            } else {
+                wrongAnswers += 1
+            }
+            
+            // After 10 attempts, show the dialog
+            if currentAttempt % 10 == 0 {
+                showDialog = true
+            }
+        }
 }
 
 struct ContentView: View {
