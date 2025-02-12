@@ -79,6 +79,14 @@ struct ContentView: View {
             }
             .padding()
             
+            // Show the correct/incorrect feedback
+            if viewModel.correctAnswers + viewModel.wrongAnswers > 0 {
+            if viewModel.correctAnswers + viewModel.wrongAnswers % 10 == 0 {
+                    Text("You got \(viewModel.correctAnswers) correct and \(viewModel.wrongAnswers) wrong answers")
+                    .padding()
+                    .foregroundColor(.blue)
+                }
+            }
         }
     }
 }
