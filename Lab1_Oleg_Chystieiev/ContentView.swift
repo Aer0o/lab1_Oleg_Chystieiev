@@ -16,6 +16,7 @@ class PrimeGameViewModel: ObservableObject {
     @Published var currentAttempt = 0
     @Published var lastSelection: Bool? = nil
     @Published var isButtonDisabled: Bool = false
+    @Published var elapsedTime = 0
     
     private var timer: Timer?
     
@@ -28,6 +29,11 @@ class PrimeGameViewModel: ObservableObject {
         timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
             self.updateNumber()
         }
+        
+        // Timer to update elapsed time every 1 second
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            self.elapsedTime += 1
+        }
     }
     
     // Update number every 5 seconds
@@ -36,6 +42,7 @@ class PrimeGameViewModel: ObservableObject {
         currentAttempt += 1
         lastSelection = nil
         isButtonDisabled = false
+        elapsedTime = 0
         
         // Show the dialog after every 10 attempts
         if currentAttempt % 10 == 0 {
@@ -78,6 +85,7 @@ class PrimeGameViewModel: ObservableObject {
         wrongAnswers = 0
         currentAttempt = 0
         showDialog = false
+        elapsedTime = 0
     }
 }
 
@@ -88,6 +96,18 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Spacer()
+            
+            // Add the timer in the top right corner
+            HStack {
+                Spacer()
+                Text("\(formatElapsedTime(viewModel.elapsedTime))")
+                        .font(.title)
+                        .foregroundColor(.white)
+                        .padding(.top, 20)
+                        .padding(.trailing, 20)
+                }
+                        
+                Spacer()
             
             // Display the current number
             Text("\(viewModel.currentNumber)")
@@ -177,6 +197,14 @@ struct ContentView: View {
         }
         .padding()
     }
+    
+    // Helper function to format elapsed time
+    func formatElapsedTime(_ time: Int) -> String {
+        let seconds = time % 60
+        let minutes = (time / 60) % 60
+        let hours = (time / 3600)
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        }
 }
 
 struct ContentView_Previews: PreviewProvider {
