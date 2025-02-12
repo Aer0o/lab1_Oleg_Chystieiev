@@ -25,7 +25,7 @@ class PrimeGameViewModel: ObservableObject {
         // Start the timer that updates the number every 5 seconds
         func startTimer() {
             timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
-                //self.updateNumber()
+                self.updateNumber()
             }
         }
     
@@ -42,17 +42,49 @@ class PrimeGameViewModel: ObservableObject {
 }
 
 struct ContentView: View {
+    @StateObject var viewModel = PrimeGameViewModel()
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Spacer()
+            
+            // Display the current number
+            Text("\(viewModel.currentNumber)")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .padding()
+            
+            Spacer()
+            
+            HStack {
+                Button(action: {
+                    viewModel.userSelectedPrime(isPrimeSelection: true)
+                }) {
+                    Text("Prime")
+                        .padding()
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                
+                Button(action: {
+                    viewModel.userSelectedPrime(isPrimeSelection: false)
+                }) {
+                    Text("Not Prime")
+                        .padding()
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
+            .padding()
+            
         }
-        .padding()
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }
