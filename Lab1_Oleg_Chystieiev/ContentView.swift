@@ -102,7 +102,25 @@ struct ContentView: View {
             }
                         
             Spacer()
+            
+            // Dialog after every 10 attempts
+            if viewModel.showDialog {
+                    VStack {
+                        Text("You got \(viewModel.correctAnswers) correct and \(viewModel.wrongAnswers) wrong")
+                    Button("Close") {
+                            viewModel.showDialog = false
+                            }
+                    Button("Reset") {
+                            viewModel.resetGame()
+                            }
+                        }
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 10)
+            }
         }
+        .padding()
     }
 }
 
